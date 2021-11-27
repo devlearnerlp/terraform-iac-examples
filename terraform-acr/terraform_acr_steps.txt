@@ -1,0 +1,84 @@
+Setup Azure Container Registry using Terraform
+
+1. Login Azure portal
+
+2. Open Azure CLI
+
+3. terraform is already installed.
+
+4. Create Terraform Files
+
+5. First create variables.tf
+
+variable "resource_group_name" {
+	type = string
+  	description = "RG name in Azure"
+}
+
+variable "acr_name" {
+	type = string
+  	description = "ACR name in Azure"
+}
+
+variable "location" {
+	type = string
+  	description = "Resources location in Azure"
+}
+
+6. Define the values for the variables declared.
+
+sudo vi terraform.tfvars
+resource_group_name = "rg-tf-acr"
+location            = "southcentralus"
+acr_name	    = "myacrrepo9pmbatch"
+
+7. Create main Terraform file
+
+sudo vi main.tf
+
+provider "azurerm" {
+  features {}
+}
+resource "azurerm_resource_group" "rg" {
+  name     = var.resource_group_name
+  location = var.location
+}
+
+resource "azurerm_container_registry" "acr" {
+  name     = var.acr_name
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  sku                      = "Basic"
+  admin_enabled            = true
+}
+
+output "admin_password" {
+  value       = azurerm_container_registry.acr.admin_password
+  description = "The object ID of the user"
+sensitive = true
+}
+
+8. Perform the below command to initialize the directory.
+
+terraform init
+
+9. Once directory is initialized, now perform below command to validate terraform files.
+
+terraform validate
+
+10. Then perform plan command to see how many resources will be created.
+terraform plan
+
+11. terraform apply or terraform apply --auto-approve
+
+Do you want to perform these actions?
+
+type yes 
+
+Now Login into Azure Cloud to see the resources created.
+
+12. How to destroy the resources ?
+Execute terraform destroy
+
+The above command to destroy both resource group and container registry created before.
+
