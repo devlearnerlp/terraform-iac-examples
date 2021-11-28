@@ -158,3 +158,26 @@ resource "local_file" "kubeconfig" {
 2. terraform plan
 3. terraform apply
 
+#########Move the generated Kubeconfig file to ~/.kube/config
+mv kubeconfig ~/.kube/config
+
+
+#######Connect to your aks cluster
+az aks get-credentials -n mycluster9pm -g aks_tf_rg
+
+####To get the nodes
+kubectl get nodes
+
+Deploy Nginx App
+kubectl create -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/controllers/nginx-deployment.yaml
+
+Once the deployment is created, use kubectl to check on the deployments by running this command: 
+
+kubectl get deployments
+#####check the pods using below command
+kubectl get pods
+
+
+#######now destroy everything
+
+terraform 
