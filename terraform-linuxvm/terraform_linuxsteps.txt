@@ -200,3 +200,9 @@ terraform apply main.tfplan
 The terraform apply command above assumes you previously ran terraform plan -out main.tfplan.
 If you specified a different filename for the -out parameter, use that same filename in the call to terraform apply.
 If you didn't use the -out parameter, simply call terraform apply without any parameters.
+
+Key points:
+
+The machine will be created with a new SSH public key. To get the corresponding private key, run terraform output -raw tls_private_key. Save the output to a file on the local machine and use it to log in to the virtual machine.
+
+terraform output -raw tls_private_key
