@@ -19,7 +19,7 @@ Let's create following tf files using Visual studio Code:
 4. main.tf - main configuration file with all the resources which will be created
 5. output.tf - Export some data to output file
 
-####create providers.tf with the below
+####create providers.tf with the below ( vi providers.tf)
 provider "azurerm" {
   features {}
 }
@@ -163,7 +163,7 @@ mv kubeconfig ~/.kube/config
 
 
 #######Connect to your aks cluster
-az aks get-credentials -n mycluster9pm -g aks_tf_rg
+az aks get-credentials -n cicdaks9pm -g cicd
 
 ####To get the nodes
 kubectl get nodes
