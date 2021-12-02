@@ -53,7 +53,7 @@
       admin_username: azureuser
       ssh_password_enabled: false
       ssh_public_keys:
-        - path: /home/azureuser/.ssh
+        - path: /home/prasanth/.ssh/authorized_keys
           key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC0PRGUMqaJ4zUkfVk0cd3RB1S32hi3hcAkmnl1ar9K3Nk36kqqrYO4dCR7rjyYpEFtikSeSvRo/4XY6lZNq5XyHqeVgYUJ/70YxqZy+UkmTYJ5gp1bCYV1/lixiq9ZTXMyTpjJN0zNLK7jdP+DEU8e0uicKdQ6lQTyW8RozNmO6bk14fgEQinhv60tB5GA82cag65yOds2jyU2xJrResuNfbeeidXd2yu8GKz6GFhrJOPMvXdUofAOaDpypERfs3/n+OOi1np6oXF0U2JLRN9/WAAoYUfBjDXTo579GBatvtXO0bsX05ew2uEq2kRC3sL308vFjyhr/N9yRd+7JW5LH8rPvNYENNreYQfKGpPgEIs9Lj2HZD1AAqA7TKaDM/cIETGJVX7BVGyIruyH2Q3CxuO2ljOLdrD3+oeOVw/K2F0qzY8Co6GXJp3o2ij2ugVXUy7c9oS/j+dN/NpD+vPSI5of2FWK47D29gSWl53F3I5ZcZ6woYgtd6tXKHS4too28Ks6gwSKvMJZYtPUGWfblTNGTR1S7fFEDN5CrGUPUNC9D9DYBVBQ1SD670eeKorKk7BdqlMa7o2jApDgOu+dNYJmU2622zRDKfyLDOoMa3qJSJURD0sb0YDKU0U3JjE5AU7Sr2Tk0AO8zzK/bmxFQPxqS+/0Yp9B5CxEgjvrBw== prasanth@cc-bc6d2ca0-767b4c5b47-w48g4"
       network_interfaces: myNIC
       image:
