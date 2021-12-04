@@ -1,0 +1,36 @@
+- name: Create Azure Kubernetes Service
+  hosts: localhost
+  connection: local
+  vars:
+    resource_group: myResourceGroup9pm
+    location: eastus
+    aks_name: myAKSCluster
+    username: azureuser
+    ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDCVtQyV7hUxNvgedHa3CehydD715wRp+J8zcQzaXP78pDFRmbEkszgMQxjJFALZzcyzAAPuKVqLpgMpoO+h6IXE9ajjtJ6bgYolNZPvuQ4+RWlAYKjj6pdwN3gO8RI9J668o3oEKrBIZaf/mq8yti+gLdIkDiBCOsdzoZ2FkobcKRL0BqPrhHVW4MBPZE9htjHLE1Y9Vh5VyDDQ3ZUEaVvUXSh9z8kAbd85rK9JF3t0EGsAXtpNNYghh2wCqZFaHDI1rR9Vl0ZBcqgiKK4bAh3Co3elAPFYSdIi0gUoznmHlEVThazUywDGUziZeH8jLCRPS+0sne8P8X4TN7x4oFJtsx1jQYeumZNJA6RhO3t48O+QmPEiSvMBqxpMbMkQsThHf+B+XcxmVOhsebJBoEJRPre17d1VPAzu9oLLCWMt+vb4n2l7evX7G/aWcFdaIu/4B6/Wbv2fw7t90CWzutp+7OyWc8ihldPl7wui3cKjTxojDDQXDYhspnhj1k7XJohoxcwW5mHTSVO8K67goc1sfArwpWkkr4LFqZehICvotzO7Kk/mKw12SiB1wPKEvNXVUDm57rz2KuX+xYhNvgRbGiOpH1ih0Egj5BfqVyUQ6D13f5iVixQlFGSxS5kpBcsY6y8UdgPggMbEAOnzWGjAPvoLZtVC/SiJ6Xddic2+w== prasanth@cc-26faf0e-5b886d67f5-vr2d8"
+    client_id: "3ea800df-6a0d-45c1-9c02-dbdc3cde5642"
+    client_secret: "BrdIbde_pto2.XdP5ybQxkol7H~HWho4-2"
+    aks_version: 1.22.1
+  tasks:
+  - name: Create resource group
+    azure_rm_resourcegroup:
+      name: "{{ resource_group }}"
+      location: "{{ location }}"
+  - name: Create a managed Azure Container Services (AKS) cluster
+    azure_rm_aks:
+      name: "{{ aks_name }}"
+      location: "{{ location }}"
+      resource_group: "{{ resource_group }}"
+      dns_prefix: "{{ aks_name }}"
+      kubernetes_version: "{{aks_version}}"
+      linux_profile:
+        admin_username: "{{ username }}"
+        ssh_key: "{{ ssh_key }}"
+      service_principal:
+        client_id: "{{ client_id }}"
+        client_secret: "{{ client_secret }}"
+      agent_pool_profiles:
+        - name: default
+          count: 2
+          vm_size: Standard_D2_v2
+      tags:
+        Environment: Production
